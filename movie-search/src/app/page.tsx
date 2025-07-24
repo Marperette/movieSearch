@@ -6,13 +6,13 @@ import fetchData, { movie } from "./fetchData";
 import { TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import Card from "./Card";
+import "./styles.css";
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
   const [movies, setMovies] = useState<movie[]>([]);
   const [isFocus, setIsFocus] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const inputRef = useRef();
   useEffect(() => {
     const fetchMovies = async () => {
       const apiResult = await fetchData("");
@@ -32,27 +32,65 @@ export default function Home() {
     setInputText(lowerCase);
   };
 
+  function results(input: string) {
+    return movies
+      .filter((x) => x.name.toLowerCase().includes(input.toLowerCase()));
+  }
+
+  function durationFormat (duration: string) {
+    let durationNum = parseInt(duration);
+    let hours = Math.floor(durationNum/3600);
+    let minutes = durationNum % 60;
+    console.log(duration);
+    console.log(durationNum);
+    console.log(hours);
+    console.log(minutes);
+    return hours + ":" + minutes;
+  }
+
   return (
-    <div>
+    <div className="main">
       <h1>Movie Search</h1>
       <div className="search-box">
         <input
           value={inputText}
           onChange={inputHandler}
           onFocus={() => setIsFocus(true)}
-          onBlur={() =>{if(!isHovered){setIsFocus(false)}} }
-          ref={inputRef}
+          onBlur={() => {
+            if (!isHovered) {
+              setIsFocus(false);
+            }
+          }}
+          //Poblem med att få bort listan vid blur
+          //skiftar mellan stora och små bokstäver även när det kanske inte borde göra det. Sökandet ska vara lower, men texten i rutan bör vara som man skrivit in den.
         />
-        {isFocus && (<div onMouseEnter={() => {setIsHovered(true)}} onMouseLeave={()=>{setIsHovered(false)}}>
-          {filterByMovieName(inputText).map((x) => (
-            <div onClick={() => {setInputText(x.name); inputRef.current.focus()}}>{x.name}</div>
-          ))}</div>)}
+        {isFocus && (
+          <div
+            onMouseEnter={() => {
+              setIsHovered(true);
+            }}
+            onMouseLeave={() => {
+              setIsHovered(false);
+            }}
+          >
+            {filterByMovieName(inputText).map((x) => (
+              <div
+                onClick={() => {
+                  setInputText(x.name);
+                }}
+              >
+                {x.name}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      <div>
-        <h2>Results:</h2>
-
-        <Card />
+      <div className="card-holder">
+        {results(inputText).map((x) => (<Card title={x.name} duration={durationFormat(x.duration)} description={x.description} />))} 
       </div>
     </div>
   );
 }
+
+//Göra något åt duration, som inte är i rätt format
+//Lösa Genres som är en string[]

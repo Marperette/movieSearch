@@ -6,7 +6,7 @@ export interface movie {
     id: string;
     name: string;
     description: string;
-    durataion: string;
+    duration: string;
     genres: string; //Egentligen en lista med strängar
 }
 //Lägga in någon form av error hantering

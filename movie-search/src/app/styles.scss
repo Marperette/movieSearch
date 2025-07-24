@@ -1,11 +1,49 @@
-.card {
+body {
+    background-color: darkslategrey;
+}
+.main {
+    margin: auto;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
-    background-color: aqua;
+    align-items: center;
+    //background-color: purple;
+}
+//Den här vara absolute, så att listan med sökalternativ kan vara relativ till den och därmed lägga sig ovanpå resten, som en normal dropdown funkar.
+.search-box {
+    margin-bottom: 24px;
+    input {
+        padding: 8px;
+        border-radius: 4px;
+        width: 400px;
+        font-size: 24px;
+    }
+}
+.card-holder {
+    //flex: 0 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    gap: 20px;
+    margin: auto;
+    padding: 20px;
+    //background-color: green;
+    
+}
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    background-color:rgba(240, 255, 255, 0.671);
     border-radius: 4px;
     padding: 10px;
+    flex: 0 0 21%;
     h3 {
-        flex: 0 0 100%;
+        text-align: center;
         font-family: 'Courier New', Courier, monospace;
+        flex: 0 0 100%;
+    }
+    p {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        flex: 0 0 100%;
     }
 }

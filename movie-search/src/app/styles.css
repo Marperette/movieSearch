@@ -1,0 +1,48 @@
+body {
+  background-color: darkslategrey;
+}
+
+.main {
+  margin: auto;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-box {
+  margin-bottom: 24px;
+}
+.search-box input {
+  padding: 8px;
+  border-radius: 4px;
+  width: 400px;
+  font-size: 24px;
+}
+
+.card-holder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgba(240, 255, 255, 0.671);
+  border-radius: 4px;
+  padding: 10px;
+  flex: 0 0 21%;
+}
+.card h3 {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  flex: 0 0 100%;
+}
+.card p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  flex: 0 0 100%;
+}/*# sourceMappingURL=styles.css.map */
