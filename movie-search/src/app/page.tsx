@@ -39,7 +39,7 @@ export default function Home() {
     let durationNum = parseInt(duration);
     let hours = Math.floor(durationNum / 3600);
     let minutes = (durationNum % 3600) / 60;
-    return hours + ":" + minutes;
+    return hours + "h" + minutes + "m";
   }
 
   return (
@@ -81,10 +81,7 @@ export default function Home() {
       </div>
       <div className="card-holder">
         {results(inputText).map((x) => (
-          <Card
-            title={x.name}
-            duration={durationFormat(x.duration)}
-            description={x.description}
+          <Card genres={x.genres} id={x.id} name={x.name} description={x.description} duration={durationFormat(x.duration)}       
           />
         ))}
       </div>

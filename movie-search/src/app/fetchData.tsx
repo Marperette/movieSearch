@@ -7,7 +7,7 @@ export interface movie {
     name: string;
     description: string;
     duration: string;
-    genres: string; //Egentligen en lista med strängar
+    genres: string[]; //Egentligen en lista med strängar
 }
 //Lägga in någon form av error hantering
 function fetchData(search:string){     

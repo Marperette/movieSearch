@@ -1,13 +1,14 @@
+import { movie } from "./fetchData";
 import "./styles.css";
 
 //Ska få input från search för att visa datan
-export default function Card({title, description, duration}) {
+export default function Card(props: movie) {
   return (
     <div className="card">
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <p>Genres</p>
-      <p>{duration}</p>
+      <h3>{props.name}</h3>
+      <p>{props.description}</p>
+      <p>{props.genres.join(", ")}</p>
+      <p>{props.duration}</p>
     </div>
   );
 }
