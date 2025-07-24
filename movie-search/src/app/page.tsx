@@ -1,10 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import styles from "./page.module.css";
 import fetchData, { movie } from "./fetchData";
-import { TextField } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./Card";
 import "./styles.css";
 
@@ -33,18 +30,15 @@ export default function Home() {
   };
 
   function results(input: string) {
-    return movies
-      .filter((x) => x.name.toLowerCase().includes(input.toLowerCase()));
+    return movies.filter((x) =>
+      x.name.toLowerCase().includes(input.toLowerCase())
+    );
   }
 
-  function durationFormat (duration: string) {
+  function durationFormat(duration: string) {
     let durationNum = parseInt(duration);
-    let hours = Math.floor(durationNum/3600);
-    let minutes = durationNum % 60;
-    console.log(duration);
-    console.log(durationNum);
-    console.log(hours);
-    console.log(minutes);
+    let hours = Math.floor(durationNum / 3600);
+    let minutes = (durationNum % 3600) / 60;
     return hours + ":" + minutes;
   }
 
@@ -86,11 +80,16 @@ export default function Home() {
         )}
       </div>
       <div className="card-holder">
-        {results(inputText).map((x) => (<Card title={x.name} duration={durationFormat(x.duration)} description={x.description} />))} 
+        {results(inputText).map((x) => (
+          <Card
+            title={x.name}
+            duration={durationFormat(x.duration)}
+            description={x.description}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-//Göra något åt duration, som inte är i rätt format
 //Lösa Genres som är en string[]
