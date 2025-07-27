@@ -79,11 +79,13 @@ export default function Home() {
           </div>
         )}
       </div>
+      <div className="centering">
       <div className="card-holder">
         {results(inputText).map((x) => (
           <Card genres={x.genres} id={x.id} name={x.name} description={x.description} duration={durationFormat(x.duration)}       
           />
         ))}
+      </div>
       </div>
     </div>
   );
