@@ -5,7 +5,7 @@ import "./styles.css";
 export default function Card(props: movie) {
 
   return (
-    <div className="card">
+    <div className="card" id={props.id}>
       <h3>{props.name}</h3>
       <p>{props.description}</p>
       <div className="genre-duration">
@@ -15,5 +15,3 @@ export default function Card(props: movie) {
     </div>
   );
 }
-
-//{props.genres.join(", ")}

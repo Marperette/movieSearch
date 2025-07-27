@@ -8,6 +8,12 @@ body {
   background-color: darkslategrey;
 }
 
+h1 {
+  font-size: 48px;
+  margin: 16px;
+  font-family: "Courier New", Courier, monospace;
+}
+
 .main {
   margin: auto;
   max-width: 1000px;
@@ -18,12 +24,36 @@ body {
 
 .search-box {
   margin-bottom: 24px;
+  position: relative;
 }
 .search-box input {
   padding: 8px;
-  border-radius: 4px;
+  border-radius: 8px;
   width: 400px;
   font-size: 24px;
+}
+.search-box input:focus {
+  border-radius: 8px 8px 0 0;
+  outline: none;
+  border: 2px saddlebrown solid;
+}
+
+.select-container {
+  border: 2px saddlebrown solid;
+  border-radius: 0 0 8px 8px;
+  position: absolute;
+  width: 100%;
+}
+.select-container :last-child {
+  border-radius: 0 0 8px 8px;
+}
+.select-container .select {
+  background-color: aqua;
+  font-size: 24px;
+  padding: 8px;
+}
+.select-container .select :hover {
+  background-color: aquamarine;
 }
 
 .card-holder {

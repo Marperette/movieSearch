@@ -59,7 +59,7 @@ export default function Home() {
           //skiftar mellan stora och små bokstäver även när det kanske inte borde göra det. Sökandet ska vara lower, men texten i rutan bör vara som man skrivit in den.
         />
         {isFocus && (
-          <div
+          <div className="select-container"
             onMouseEnter={() => {
               setIsHovered(true);
             }}
@@ -68,7 +68,7 @@ export default function Home() {
             }}
           >
             {filterByMovieName(inputText).map((x) => (
-              <div
+              <div id={x.id} className="select"
                 onClick={() => {
                   setInputText(x.name);
                 }}
