@@ -1,7 +1,7 @@
 "use client";
 
 import fetchData, { movie } from "./fetchData";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Card from "./Card";
 import "./styles.css";
 
@@ -10,6 +10,9 @@ export default function Home() {
   const [movies, setMovies] = useState<movie[]>([]);
   const [isFocus, setIsFocus] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+
   useEffect(() => {
     const fetchMovies = async () => {
       const apiResult = await fetchData("");
@@ -25,8 +28,7 @@ export default function Home() {
   }
 
   let inputHandler = (e: { target: { value: string } }) => {
-    let lowerCase = e.target.value.toLowerCase();
-    setInputText(lowerCase);
+    setInputText(e.target.value.toLowerCase());
   };
 
   function results(input: string) {
@@ -45,7 +47,13 @@ export default function Home() {
   return (
     <div className="main">
       <h1>Movie Search</h1>
-      <div className="search-box">
+      <div className="search-box"  
+      onMouseEnter={() => {
+              setIsHovered(true);
+            }}
+            onMouseLeave={() => {
+              setIsHovered(false);
+            }}>
         <input
           value={inputText}
           onChange={inputHandler}
@@ -55,22 +63,20 @@ export default function Home() {
               setIsFocus(false);
             }
           }}
+          ref={inputRef}
           //Poblem med att få bort listan vid blur
           //skiftar mellan stora och små bokstäver även när det kanske inte borde göra det. Sökandet ska vara lower, men texten i rutan bör vara som man skrivit in den.
         />
+        <button>Submit</button>
+        
         {isFocus && (
-          <div className="select-container"
-            onMouseEnter={() => {
-              setIsHovered(true);
-            }}
-            onMouseLeave={() => {
-              setIsHovered(false);
-            }}
-          >
+          <div className="select-container">
             {filterByMovieName(inputText).map((x) => (
               <div id={x.id} className="select"
                 onClick={() => {
                   setInputText(x.name);
+                  inputRef.current?.focus();
+                  setIsHovered(false);
                 }}
               >
                 {x.name}
@@ -82,7 +88,7 @@ export default function Home() {
       <div className="centering">
       <div className="card-holder">
         {results(inputText).map((x) => (
-          <Card genres={x.genres} id={x.id} name={x.name} description={x.description} duration={durationFormat(x.duration)}       
+          <Card genres={x.genres} id={x.id} name={x.name} thumbnail={x.thumbnail} description={x.description} duration={durationFormat(x.duration)}       
           />
         ))}
       </div>
@@ -91,4 +97,3 @@ export default function Home() {
   );
 }
 
-//Lösa Genres som är en string[]
