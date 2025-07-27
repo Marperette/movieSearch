@@ -1,143 +1,138 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
 body {
-    background-color: darkslategrey;
+  background-color: darkslategrey;
 }
 h1 {
-    font-size: 48px;
-    margin: 16px;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
+  font-size: 48px;
+  margin: 16px;
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
 }
 .main {
-    
-    //width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
+  //width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
 
-    @media(min-width:550px) {
-        max-width: 900px;
-        margin: auto;
-        
-    }
+  @media (min-width: 550px) {
+    max-width: 900px;
+    margin: auto;
+  }
 }
 
 .search-box {
-    margin-bottom: 24px;
-    position: relative;
-    input {
-        padding: 8px;
-        border-radius: 8px;
-        //width: 90vh;
-        font-size: 24px;
-        &:focus {
-            border-radius: 8px 8px 0 0;
-            outline: none;
-            border: 2px darkslategrey solid;
-        }
-
-        @media(min-width: 550px){
-            width: 400px;
-        }
+  margin-bottom: 24px;
+  position: relative;
+  input {
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 24px;
+    &:focus {
+      border-radius: 8px 8px 0 0;
+      outline: none;
+      border: 2px darkslategrey solid;
     }
+
+    @media (min-width: 550px) {
+      width: 400px;
+    }
+  }
 }
 
 .select-container {
-    border: 2px darkslategrey solid;
+  border: 2px darkslategrey solid;
+  border-radius: 0 0 8px 8px;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  cursor: pointer;
+  :last-child {
     border-radius: 0 0 8px 8px;
-    position: absolute;
-    width: 100%;
-    cursor: pointer;
-    :last-child {
-        border-radius: 0 0 8px 8px;
+  }
+  .select {
+    background-color: white;
+    font-size: 24px;
+    padding: 8px;
+    &:hover {
+      background-color: darkslategrey;
     }
-    .select {
-        background-color: white;
-        //margin: 2px;
-        font-size: 24px;
-        padding: 8px;
-        &:hover {
-            background-color: darkslategrey;
-        }
-        
-    }
+  }
 }
 .card-holder {
-    display: grid;
-    justify-content:start;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    background-color: white;
-    width: fit-content;
-    
+  display: grid;
+  justify-content: start;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background-color: white;
+  width: fit-content;
 }
 
-.centering{
-    display: block;
-    justify-content: right;
-    width: fit-content;
-    padding: auto;
+.centering {
+  display: block;
+  justify-content: right;
+  width: fit-content;
+  padding: auto;
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
-    background-color:rgba(240, 255, 255, 0.671);
-    border-radius: 8px;
-    padding: 20px 10px;
-    height: fit-content;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    h3 {
-        text-align: center;
-        font-family: 'Courier New', Courier, monospace;
-        flex: 0 0 10%;
-        align-content: space-around;
-        margin-bottom: 20px;
-    }
-    .thumbnail {
-        flex: 0 0 20%;
-        border-radius: 4px;
-    }
-    
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(240, 255, 255, 0.671);
+  border-radius: 8px;
+  padding: 20px 10px;
+  height: fit-content;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  h3 {
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+    flex: 0 0 10%;
+    align-content: space-around;
+    margin-bottom: 20px;
+  }
+  .thumbnail {
+    flex: 0 0 20%;
+    border-radius: 4px;
+  }
+
+  p {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    margin: 20px 0;
+    align-self: stretch;
+    overflow-y: auto;
+  }
+  .first {
+    text-transform: capitalize;
+  }
+  .genre-duration {
+    margin-top: auto;
     p {
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        margin: 20px 0;
-        align-self: stretch;
-        overflow-y:auto;
+      margin: 0;
     }
-    .first {
-        text-transform: capitalize;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    li {
+      text-transform: capitalize;
+      list-style: none;
+      background-color: darkslategrey; // rgb(52, 60, 68);
+      padding: 2px 6px;
+      border-radius: 8px;
+      min-width: 60px;
+      text-align: center;
+      color: white;
     }
-    .genre-duration {
-        margin-top: auto;
-        p {
-            margin: 0;
-        }
-    }
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        li {
-            text-transform: capitalize;
-            list-style: none;
-            background-color: darkslategrey;// rgb(52, 60, 68);
-            padding: 2px 6px;
-            border-radius: 8px;
-            min-width: 60px;
-            text-align: center;
-            color: white;
-        }
-    } 
-    @media(min-width: 560px) {
-        height: 800px
-    }
-    
+  }
+  @media (min-width: 560px) {
+    height: 800px;
+  }
 }

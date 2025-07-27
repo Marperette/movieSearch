@@ -53,6 +53,7 @@ h1 {
   border-radius: 0 0 8px 8px;
   position: absolute;
   width: 100%;
+  background-color: white;
   cursor: pointer;
 }
 .select-container :last-child {

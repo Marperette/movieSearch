@@ -12,7 +12,6 @@ export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-
   useEffect(() => {
     const fetchMovies = async () => {
       const apiResult = await fetchData("");
@@ -47,13 +46,15 @@ export default function Home() {
   return (
     <div className="main">
       <h1>Movie Search</h1>
-      <div className="search-box"  
-      onMouseEnter={() => {
-              setIsHovered(true);
-            }}
-            onMouseLeave={() => {
-              setIsHovered(false);
-            }}>
+      <div
+        className="search-box"
+        onMouseEnter={() => {
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+        }}
+      >
         <input
           value={inputText}
           onChange={inputHandler}
@@ -68,11 +69,13 @@ export default function Home() {
           //skiftar mellan stora och små bokstäver även när det kanske inte borde göra det. Sökandet ska vara lower, men texten i rutan bör vara som man skrivit in den.
         />
         <button>Submit</button>
-        
+
         {isFocus && (
           <div className="select-container">
             {filterByMovieName(inputText).map((x) => (
-              <div id={x.id} className="select"
+              <div
+                id={x.id}
+                className="select"
                 onClick={() => {
                   setInputText(x.name);
                   inputRef.current?.focus();
@@ -86,14 +89,19 @@ export default function Home() {
         )}
       </div>
       <div className="centering">
-      <div className="card-holder">
-        {results(inputText).map((x) => (
-          <Card genres={x.genres} id={x.id} name={x.name} thumbnail={x.thumbnail} description={x.description} duration={durationFormat(x.duration)}       
-          />
-        ))}
-      </div>
+        <div className="card-holder">
+          {results(inputText).map((x) => (
+            <Card
+              genres={x.genres}
+              id={x.id}
+              name={x.name}
+              thumbnail={x.thumbnail}
+              description={x.description}
+              duration={durationFormat(x.duration)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
 }
-
