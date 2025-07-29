@@ -9,12 +9,26 @@ export interface movie {
   thumbnail: string;
 }
 //Lägga in någon form av error hantering
-function fetchData(search: string) {
+async function fetchData(search: string) {
   let movies = fetch(
     `https://movies-mock-api-677053851485.europe-north1.run.app/api/movies?q=${search}`
   )
     .then((res) => {
-      return res.json();
+        if(res.ok) {
+            if (res.status == 404){
+                throw new Error(`Response status: ${res.status}, Page no found`, {cause: res.status});  
+            }
+            else if(res.status == 401){
+                throw new Error(`Response status: ${res.status}, Unauthorized`, {cause: res.status});  
+            }
+            else if(res.status == 403){
+                throw new Error(`Response status: ${res.status}, Forbidden`, {cause: res.status});  
+            }
+            else if(res.status == 429){
+                throw new Error(`Response status: ${res.status}, Rate-limited`, {cause: res.status});  
+            }
+            return res.json();
+        }
     })
     .then((data): movie[] => {
       return data;

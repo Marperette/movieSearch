@@ -30,9 +30,9 @@ h1 {
 
 .search-box {
   margin-bottom: 24px;
-  position: relative;
 }
 .search-box input {
+  position: relative;
   padding: 8px;
   border-radius: 8px;
   font-size: 24px;
@@ -66,6 +66,11 @@ h1 {
 }
 .select-container .select:hover {
   background-color: darkslategrey;
+}
+@media (min-width: 550px) {
+  .select-container {
+    width: 400px;
+  }
 }
 
 .card-holder {
@@ -142,4 +147,13 @@ h1 {
   .card {
     height: 800px;
   }
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.no-results img {
+  height: 85%;
 }/*# sourceMappingURL=styles.css.map */

@@ -3,7 +3,8 @@
 import fetchData, { movie } from "./fetchData";
 import { useEffect, useState, useRef } from "react";
 import Card from "./Card";
-import "./styles.css";
+import "./styles.css"; 
+import noContent from "../../public/no-content.png"
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
@@ -14,8 +15,13 @@ export default function Home() {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      try{
       const apiResult = await fetchData("");
       setMovies(apiResult);
+      }
+      catch (error: any){
+        console.log(error)
+      }
     };
     fetchMovies();
   }, []);
@@ -56,6 +62,7 @@ export default function Home() {
         }}
       >
         <input
+        id="search-input"
           value={inputText}
           onChange={inputHandler}
           onFocus={() => setIsFocus(true)}
@@ -65,7 +72,6 @@ export default function Home() {
             }
           }}
           ref={inputRef}
-          //Poblem med att få bort listan vid blur
           //skiftar mellan stora och små bokstäver även när det kanske inte borde göra det. Sökandet ska vara lower, men texten i rutan bör vara som man skrivit in den.
         />
         <button>Submit</button>
@@ -74,7 +80,7 @@ export default function Home() {
           <div className="select-container">
             {filterByMovieName(inputText).map((x) => (
               <div
-                id={x.id}
+                key={x.id}
                 className="select"
                 onClick={() => {
                   setInputText(x.name);
@@ -90,8 +96,9 @@ export default function Home() {
       </div>
       <div className="centering">
         <div className="card-holder">
-          {results(inputText).map((x) => (
+          {results(inputText).length ? results(inputText).map((x) => (
             <Card
+            key={x.id}
               genres={x.genres}
               id={x.id}
               name={x.name}
@@ -99,7 +106,8 @@ export default function Home() {
               description={x.description}
               duration={durationFormat(x.duration)}
             />
-          ))}
+          )) : <div className="no-results"><img src={noContent.src}></img><p>No movies found</p></div>
+          }
         </div>
       </div>
     </div>
