@@ -63,6 +63,7 @@ export default function Home() {
           setIsHovered(false);
         }}
       >
+        <div className="input-wrapper">
         <input
           id="search-input"
           value={inputText}
@@ -78,6 +79,7 @@ export default function Home() {
             if (e.key === "Enter") updateSearchResult(inputText);
           }}
         />
+        
 
         {isFocus && (
           <div className="select-container">
@@ -95,11 +97,12 @@ export default function Home() {
               </div>
             ))}
           </div>
-        )}
+        )}</div>
+        <button onClick={()=> updateSearchResult(inputText)}>Search</button>
       </div>
       <div className="centering">
         {isLoading ? (
-          <div><p>Loading...</p></div>
+          <div className="loading"><p>Loading...</p></div>
         ) : (
           <div className="card-holder">
             {searchResult.length ? (
@@ -117,7 +120,7 @@ export default function Home() {
             ) : (
               <div className="no-results">
                 <img src={noContent.src}></img>
-                <p>No movies found</p>
+                <p>No movie titles matches your search</p>
               </div>
             )}
           </div>

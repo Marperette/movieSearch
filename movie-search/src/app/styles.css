@@ -15,6 +15,10 @@ h1 {
   text-align: center;
 }
 
+p {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -30,21 +34,44 @@ h1 {
 
 .search-box {
   margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
 }
-.search-box input {
+@media (min-width: 650px) {
+  .search-box {
+    flex-direction: row;
+    gap: 24px;
+  }
+}
+
+input {
   position: relative;
   padding: 8px;
   border-radius: 8px;
   font-size: 24px;
 }
-.search-box input:focus {
+input:focus {
   border-radius: 8px 8px 0 0;
   outline: none;
   border: 2px darkslategrey solid;
 }
 @media (min-width: 550px) {
-  .search-box input {
+  input {
     width: 400px;
+  }
+}
+
+button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: darkslategrey;
+  color: white;
+  margin-top: 8px;
+  font-size: 20px;
+}
+@media (min-width: 650px) {
+  button {
+    margin-top: 0px;
   }
 }
 
@@ -52,7 +79,7 @@ h1 {
   border: 2px darkslategrey solid;
   border-radius: 0 0 8px 8px;
   position: absolute;
-  width: 100%;
+  width: 312px;
   background-color: white;
   cursor: pointer;
 }
@@ -114,7 +141,6 @@ h1 {
   border-radius: 4px;
 }
 .card p {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: 20px 0;
   align-self: stretch;
   overflow-y: auto;
