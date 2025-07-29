@@ -3,28 +3,36 @@
 import fetchData, { movie } from "./fetchData";
 import { useEffect, useState, useRef } from "react";
 import Card from "./Card";
-import "./styles.css"; 
-import noContent from "../../public/no-content.png"
+import "./styles.css";
+import noContent from "../../public/no-content.png";
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
   const [movies, setMovies] = useState<movie[]>([]);
   const [isFocus, setIsFocus] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [searchResult, setSearchResult] = useState<movie[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      try{
-      const apiResult = await fetchData("");
-      setMovies(apiResult);
+      try {
+        const apiResult = await fetchData("");
+        setMovies(apiResult);
+        setSearchResult(apiResult);
+      } catch (error: any) {
+        console.log(error);
       }
-      catch (error: any){
-        console.log(error)
-      }
+      setIsLoading(false);
     };
     fetchMovies();
   }, []);
+
+  async function updateSearchResult(queryString: string) {
+    const result = await fetchData(queryString);
+    setSearchResult(result);
+  }
 
   function filterByMovieName(input: string) {
     return movies
@@ -36,16 +44,10 @@ export default function Home() {
     setInputText(e.target.value.toLowerCase());
   };
 
-  function results(input: string) {
-    return movies.filter((x) =>
-      x.name.toLowerCase().includes(input.toLowerCase())
-    );
-  }
-
   function durationFormat(duration: string) {
-    let durationNum = parseInt(duration);
-    let hours = Math.floor(durationNum / 3600);
-    let minutes = (durationNum % 3600) / 60;
+    const durationNum = parseInt(duration);
+    const hours = Math.floor(durationNum / 3600);
+    const minutes = (durationNum % 3600) / 60;
     return hours + "h" + minutes + "m";
   }
 
@@ -62,7 +64,7 @@ export default function Home() {
         }}
       >
         <input
-        id="search-input"
+          id="search-input"
           value={inputText}
           onChange={inputHandler}
           onFocus={() => setIsFocus(true)}
@@ -72,9 +74,10 @@ export default function Home() {
             }
           }}
           ref={inputRef}
-          //skiftar mellan stora och små bokstäver även när det kanske inte borde göra det. Sökandet ska vara lower, men texten i rutan bör vara som man skrivit in den.
+          onKeyDown={(e) => {
+            if (e.key === "Enter") updateSearchResult(inputText);
+          }}
         />
-        <button>Submit</button>
 
         {isFocus && (
           <div className="select-container">
@@ -95,20 +98,30 @@ export default function Home() {
         )}
       </div>
       <div className="centering">
-        <div className="card-holder">
-          {results(inputText).length ? results(inputText).map((x) => (
-            <Card
-            key={x.id}
-              genres={x.genres}
-              id={x.id}
-              name={x.name}
-              thumbnail={x.thumbnail}
-              description={x.description}
-              duration={durationFormat(x.duration)}
-            />
-          )) : <div className="no-results"><img src={noContent.src}></img><p>No movies found</p></div>
-          }
-        </div>
+        {isLoading ? (
+          <div><p>Loading...</p></div>
+        ) : (
+          <div className="card-holder">
+            {searchResult.length ? (
+              searchResult.map((x) => (
+                <Card
+                  key={x.id}
+                  genres={x.genres}
+                  id={x.id}
+                  name={x.name}
+                  thumbnail={x.thumbnail}
+                  description={x.description}
+                  duration={durationFormat(x.duration)}
+                />
+              ))
+            ) : (
+              <div className="no-results">
+                <img src={noContent.src}></img>
+                <p>No movies found</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
