@@ -1,8 +1,7 @@
-import { movie } from "./fetchData";
-import "./styles.css";
-import fallback from "../../public/fallback.png";
+import movie from "../Interfaces/movie"
+import "./../styles.css";
+import fallback from "../../../public/fallback.png"
 
-//Ska få input från search för att visa datan
 export default function Card(props: movie) {
   return (
     <div className="card" key={props.id}>

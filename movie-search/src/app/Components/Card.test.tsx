@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Card from "./Card";
-import fallback from "../../public/fallback.png";
+import fallback from "../../../public/fallback.png";
 
 const mockMovie = {
   id: "123",

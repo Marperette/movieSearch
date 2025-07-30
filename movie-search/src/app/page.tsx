@@ -1,8 +1,9 @@
 "use client";
 
-import fetchData, { movie } from "./fetchData";
+import fetchData from "./Hooks/fetchData";
+import movie from "./Interfaces/movie"
 import { useEffect, useState, useRef } from "react";
-import Card from "./Card";
+import Card from "./Components/Card";
 import "./styles.css";
 import noContent from "../../public/no-content.png";
 
