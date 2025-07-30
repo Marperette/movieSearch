@@ -1,4 +1,3 @@
-//$text-color: ;
 $primary-color: darkslategrey;
 $secondary-color: white;
 $primary-text-color: black;
@@ -20,7 +19,7 @@ h1 {
   text-align: center;
 }
 p {
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .main {
@@ -47,18 +46,18 @@ p {
 }
 
 input {
-    position: relative;
-    padding: 8px;
-    border-radius: 8px;
-    font-size: 24px;
-    &:focus {
-      border-radius: 8px 8px 0 0;
-      outline: none;
-      border: 2px $primary-color solid;
-    }
-    @media (min-width: 550px) {
-      width: 400px;
-    }
+  position: relative;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 24px;
+  &:focus {
+    border-radius: 8px 8px 0 0;
+    outline: none;
+    border: 2px $primary-color solid;
+  }
+  @media (min-width: 550px) {
+    width: 400px;
+  }
 }
 
 button {
@@ -132,7 +131,6 @@ button {
   }
 
   p {
-
     margin: 20px 0;
     align-self: stretch;
     overflow-y: auto;

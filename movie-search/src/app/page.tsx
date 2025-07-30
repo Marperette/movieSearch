@@ -1,7 +1,7 @@
 "use client";
 
 import fetchData from "./Hooks/fetchData";
-import movie from "./Interfaces/movie"
+import movie from "./Interfaces/movie";
 import { useEffect, useState, useRef } from "react";
 import Card from "./Components/Card";
 import "./styles.css";
@@ -41,9 +41,9 @@ export default function Home() {
       .slice(0, 5);
   }
 
-  let inputHandler = (e: { target: { value: string } }) => {
+  function inputHandler(e: { target: { value: string } }) {
     setInputText(e.target.value.toLowerCase());
-  };
+  }
 
   function durationFormat(duration: string) {
     const durationNum = parseInt(duration);
@@ -65,45 +65,47 @@ export default function Home() {
         }}
       >
         <div className="input-wrapper">
-        <input
-          id="search-input"
-          value={inputText}
-          onChange={inputHandler}
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => {
-            if (!isHovered) {
-              setIsFocus(false);
-            }
-          }}
-          ref={inputRef}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") updateSearchResult(inputText);
-          }}
-        />
-        
+          <input
+            id="search-input"
+            value={inputText}
+            onChange={inputHandler}
+            onFocus={() => setIsFocus(true)}
+            onBlur={() => {
+              if (!isHovered) {
+                setIsFocus(false);
+              }
+            }}
+            ref={inputRef}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") updateSearchResult(inputText);
+            }}
+          />
 
-        {isFocus && (
-          <div className="select-container">
-            {filterByMovieName(inputText).map((x) => (
-              <div
-                key={x.id}
-                className="select"
-                onClick={() => {
-                  setInputText(x.name);
-                  inputRef.current?.focus();
-                  setIsHovered(false);
-                }}
-              >
-                {x.name}
-              </div>
-            ))}
-          </div>
-        )}</div>
-        <button onClick={()=> updateSearchResult(inputText)}>Search</button>
+          {isFocus && (
+            <div className="select-container">
+              {filterByMovieName(inputText).map((x) => (
+                <div
+                  key={x.id}
+                  className="select"
+                  onClick={() => {
+                    setInputText(x.name);
+                    inputRef.current?.focus();
+                    setIsHovered(false);
+                  }}
+                >
+                  {x.name}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <button onClick={() => updateSearchResult(inputText)}>Search</button>
       </div>
       <div className="centering">
         {isLoading ? (
-          <div className="loading"><p>Loading...</p></div>
+          <div className="loading">
+            <p>Loading...</p>
+          </div>
         ) : (
           <div className="card-holder">
             {searchResult.length ? (
